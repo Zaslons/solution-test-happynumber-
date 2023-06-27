@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from unittest.mock import patch
 from Happynumber import Solution
 
 app = Flask(__name__)
@@ -18,7 +19,7 @@ def result():
         number = int(raw_number)
         if number < 0:
             raise ValueError('Number cannot be negative.')
-        elif number > 10**100:  # A limit set for the maximum size of the number.
+        elif number >= 10**100:  # A limit set for the maximum size of the number.
             raise ValueError('Number is too large.')
     except ValueError as e:
         if "invalid literal" in str(e):
@@ -32,3 +33,4 @@ def result():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
